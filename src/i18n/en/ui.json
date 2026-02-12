@@ -1,0 +1,37 @@
+{
+	"gameLobbyMd": "# Game Lobby\n\nThis is a sample markdown to demonstrate various markdown features.\n\n## Starting soon\n\nGame is starting soon. **Get ready!**\n\n## Rules\n\n1. Wait for the host to start the game.\n2. Follow the instructions on the presenter screen.\n3. Open [Games for Crowds](https://gamesforcrowds.com) for more info.\n\n## What people say\n\n> **This game is awesome!** - Player 1\n\n> **I had a good time playing this.** - Player 2\n\n> **Always looking forward to the next round!** - Player 3\n\n---\n\n## Sample Code\n\n```typescript\n// Code block\nconsole.log('Hello, world!');\n```",
+
+	"connectionsMd": "Scan the QR to join the game.",
+
+	"sharedStateMd": "# Shared State Host\nThis is an example of shared state view. Host can start the game, open the presenter screen and allow players to join by scanning the QR.\n\n## Host Actions\nHere's a demo of dashboard actions that can be used to control the state on presenter and player screens.",
+
+	"sharedStatePlayerMd": "# Shared State Player\nYou are connected as a player. Host has started the game. In this shared state example the playtime is synchronized between all players.",
+
+	"players": "Players Connected",
+	"online": "Online",
+	"offline": "Offline",
+	"startButton": "Start Game",
+	"stopButton": "Stop Game",
+	"loading": "Loading...",
+
+	"menuHelpMd": "# Help\n\nThis is the help section. Here you can find information about how to play the game and get assistance if needed.\n\n## How to Play\n\n1. Join the game using the provided link or QR code.\n2. Follow the instructions on your screen.\n3. Interact with other players as required by the game.\n\n## Getting Assistance\n\nIf you encounter any issues, please contact the host or refer to the FAQ section on our website.",
+
+	"createProfileMd": "# Welcome!\n\nPlease enter your name to join the game.",
+
+	"playerNamePlaceholder": "Your name...",
+	"playerNameLabel": "Name:",
+	"playerNameButton": "Continue",
+
+	"playerLinkLabel": "Player Link",
+	"presenterLinkLabel": "Presenter Link",
+
+	"togglePresenterQrButton": "Toggle Presenter QR",
+
+	"menuAriaLabel": "Open menu drawer",
+	"menuHelpAriaLabel": "Open help drawer",
+
+	"gameTitleLabel": "Game title",
+	"gameDurationLabel": "Game duration (mins)",
+	"saveButton": "Save",
+	"resetButton": "Reset"
+}
