@@ -1,4 +1,5 @@
 import { kmClient } from '@/services/km-client';
+import { PLAYER_COLORS } from '@/utils/gameConstants';
 import {
 	localPlayerStore,
 	type LocalPlayerState
@@ -21,17 +22,49 @@ export const localPlayerActions = {
 	},
 
 	/**
-	 * Set player name - updates both local store and globals players list.
-	 *
-	 * Note: This is an example of a multi-store transaction.
+	 * Set player name and avatar prompt - updates both local store and global players list.
+	 * Assigns a unique color from the palette based on current player count.
 	 */
-	async setPlayerName(name: string) {
+	async setPlayerName(name: string, avatarPrompt: string) {
 		await kmClient.transact(
 			[localPlayerStore, playersStore],
 			([localPlayerState, playersState]) => {
+				const existingCount = Object.keys(playersState.players).length;
+				const color =
+					PLAYER_COLORS[existingCount % PLAYER_COLORS.length] || '#6b7280';
+
 				localPlayerState.name = name;
-				playersState.players[kmClient.id] = { name };
+				localPlayerState.avatarPrompt = avatarPrompt;
+				playersState.players[kmClient.id] = {
+					name,
+					color,
+					avatarUrl: '',
+					avatarJobId: ''
+				};
 			}
 		);
+	},
+
+	/** Update avatar job ID in both local and global stores */
+	async setAvatarJobId(jobId: string) {
+		await kmClient.transact(
+			[localPlayerStore, playersStore],
+			([localPlayerState, playersState]) => {
+				localPlayerState.avatarJobId = jobId;
+				if (playersState.players[kmClient.id]) {
+					playersState.players[kmClient.id].avatarJobId = jobId;
+				}
+			}
+		);
+	},
+
+	/** Set avatar URL in global players store once generation completes */
+	async setAvatarUrl(url: string) {
+		await kmClient.transact([playersStore], ([playersState]) => {
+			if (playersState.players[kmClient.id]) {
+				playersState.players[kmClient.id].avatarUrl = url;
+				playersState.players[kmClient.id].avatarJobId = '';
+			}
+		});
 	}
 };

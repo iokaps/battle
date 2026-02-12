@@ -30,7 +30,8 @@ export function HostControls() {
 	const { t } = useTranslation();
 	const { lang, title } = useSnapshot(kmClient.metaStore.proxy);
 	const { started } = useSnapshot(gameSessionStore.proxy);
-	const { gameDuration, showPresenterQr } = useSnapshot(gameConfigStore.proxy);
+	const { gameDuration, showPresenterQr, teamMode, shrinkingArena } =
+		useSnapshot(gameConfigStore.proxy);
 
 	// Local state for form inputs
 	const [localLanguage, setLocalLanguage] = React.useState(lang);
@@ -189,6 +190,28 @@ export function HostControls() {
 					{t('ui:resetButton')}
 				</button>
 			</div>
+
+			<button
+				type="button"
+				className={teamMode === 'teams' ? 'km-btn-neutral' : 'km-btn-secondary'}
+				onClick={gameConfigActions.toggleTeamMode}
+				disabled={started}
+			>
+				{teamMode === 'teams'
+					? t('ui:teamModeTeams', 'Team Mode: 2 Teams')
+					: t('ui:teamModeFfa', 'Team Mode: FFA')}
+			</button>
+
+			<button
+				type="button"
+				className={shrinkingArena ? 'km-btn-neutral' : 'km-btn-secondary'}
+				onClick={gameConfigActions.toggleShrinkingArena}
+				disabled={started}
+			>
+				{shrinkingArena
+					? t('ui:shrinkingArenaOn', 'Shrinking Arena: ON')
+					: t('ui:shrinkingArenaOff', 'Shrinking Arena: OFF')}
+			</button>
 
 			<button
 				type="button"

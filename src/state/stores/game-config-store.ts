@@ -5,7 +5,9 @@ export type { GameConfigState };
 
 const initialState: GameConfigState = {
 	gameDuration: 10,
-	showPresenterQr: true
+	showPresenterQr: true,
+	teamMode: 'ffa',
+	shrinkingArena: false
 };
 
 /**

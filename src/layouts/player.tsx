@@ -10,7 +10,7 @@ interface LayoutProps {
 const PlayerRoot = ({ children, className }: LayoutProps) => (
 	<div
 		className={cn(
-			'grid min-h-dvh grid-rows-[auto_1fr_auto] bg-slate-100',
+			'bg-arena-bg grid min-h-dvh grid-rows-[auto_1fr_auto] text-slate-100',
 			className
 		)}
 	>
@@ -21,7 +21,7 @@ const PlayerRoot = ({ children, className }: LayoutProps) => (
 const PlayerHeader = ({ children, className }: LayoutProps) => (
 	<header
 		className={cn(
-			'sticky top-0 z-10 bg-slate-50/95 shadow-xs backdrop-blur-xs',
+			'bg-arena-surface/95 sticky top-0 z-10 border-b border-white/10 shadow-xs backdrop-blur-md',
 			className
 		)}
 	>
@@ -43,7 +43,7 @@ const PlayerMain = ({ children, className }: LayoutProps) => (
 const PlayerFooter = ({ children, className }: LayoutProps) => (
 	<footer
 		className={cn(
-			'sticky bottom-0 z-10 border-t border-slate-200 bg-slate-50/95 backdrop-blur-xs',
+			'bg-arena-surface/95 sticky bottom-0 z-10 border-t border-white/10 backdrop-blur-md',
 			className
 		)}
 	>

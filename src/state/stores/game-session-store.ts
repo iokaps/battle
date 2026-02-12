@@ -6,7 +6,8 @@ export type { GameSessionState };
 const initialState: GameSessionState = {
 	started: false,
 	startTimestamp: 0,
-	controllerConnectionId: ''
+	controllerConnectionId: '',
+	countdownStartTimestamp: 0
 };
 
 /**

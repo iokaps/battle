@@ -14,7 +14,7 @@ export function PlayerMenu() {
 	const handleOpenHelp = () => {
 		openDrawer({
 			content: (
-				<div className="max-h-full w-full overflow-y-auto">
+				<div className="bg-arena-bg max-h-full w-full overflow-y-auto text-slate-100">
 					<div className="container mx-auto px-4 py-16">
 						<article className="prose">
 							<Markdown>{t('ui:menuHelpMd')}</Markdown>
@@ -30,7 +30,7 @@ export function PlayerMenu() {
 			<button
 				type="button"
 				onClick={handleOpenHelp}
-				className="flex size-9 cursor-pointer items-center justify-center rounded-full transition-colors hover:bg-slate-900 hover:text-slate-50"
+				className="flex size-9 cursor-pointer items-center justify-center rounded-full text-slate-300 transition-colors hover:bg-white/10 hover:text-slate-100"
 			>
 				<HelpCircle className="size-5" />
 				<span className="sr-only">{t('ui:menuHelpAriaLabel')}</span>

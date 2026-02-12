@@ -6,7 +6,11 @@ import { z } from '@kokimoki/kit';
 export const localPlayerStoreSchema = z.object({
 	/** Player's display name (also registered in playersStore) */
 	name: z.string(),
-	currentView: z.enum(['lobby', 'game-state'])
+	currentView: z.enum(['lobby', 'game-state', 'battle']),
+	/** Avatar text prompt entered by the player */
+	avatarPrompt: z.string(),
+	/** Job ID for tracking avatar generation across reloads */
+	avatarJobId: z.string()
 });
 
 export type LocalPlayerState = z.infer<typeof localPlayerStoreSchema>;

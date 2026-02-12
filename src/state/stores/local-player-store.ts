@@ -5,7 +5,9 @@ export type { LocalPlayerState };
 
 const initialState: LocalPlayerState = {
 	name: '',
-	currentView: 'lobby'
+	currentView: 'lobby',
+	avatarPrompt: '',
+	avatarJobId: ''
 };
 
 /**

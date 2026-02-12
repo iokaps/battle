@@ -29,6 +29,21 @@ export const gameConfigActions = {
 		});
 	},
 
+	/** Toggle team mode between FFA and 2-team */
+	async toggleTeamMode() {
+		await kmClient.transact([gameConfigStore], ([gameConfigState]) => {
+			gameConfigState.teamMode =
+				gameConfigState.teamMode === 'ffa' ? 'teams' : 'ffa';
+		});
+	},
+
+	/** Toggle shrinking arena on/off */
+	async toggleShrinkingArena() {
+		await kmClient.transact([gameConfigStore], ([gameConfigState]) => {
+			gameConfigState.shrinkingArena = !gameConfigState.shrinkingArena;
+		});
+	},
+
 	/** Toggle QR code visibility for presenter screen */
 	async togglePresenterQr() {
 		await kmClient.transact([gameConfigStore], ([gameConfigState]) => {

@@ -3,7 +3,9 @@ import enMeta from './src/i18n/en/meta.json';
 import {
 	gameConfigStoreSchema,
 	gameSessionStoreSchema,
+	gameWorldStoreSchema,
 	localPlayerStoreSchema,
+	playerInputStoreSchema,
 	playersStoreSchema
 } from './src/state/schemas';
 
@@ -98,6 +100,8 @@ export const kokimokiConfig: KokimokiKitConfig = {
 		},
 		{ pattern: 'game-session', schema: gameSessionStoreSchema },
 		{ pattern: 'players-registry', schema: playersStoreSchema },
+		{ pattern: 'player-inputs', schema: playerInputStoreSchema },
+		{ pattern: 'game-world', schema: gameWorldStoreSchema },
 		{ pattern: 'local-player', schema: localPlayerStoreSchema, local: true }
 	],
 

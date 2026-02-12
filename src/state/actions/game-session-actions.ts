@@ -8,8 +8,16 @@ import { gameSessionStore } from '../stores/game-session-store';
  * for synchronized time across all clients.
  */
 export const gameSessionActions = {
-	/** Start the game and record server timestamp for countdown */
+	/** Start the countdown phase (host presses "Start"). Battle begins after countdown. */
 	async startGame() {
+		await kmClient.transact([gameSessionStore], ([gameSessionState]) => {
+			gameSessionState.countdownStartTimestamp = kmClient.serverTimestamp();
+			gameSessionState.started = false;
+		});
+	},
+
+	/** Begin the actual battle (called by controller after countdown finishes) */
+	async startBattle() {
 		await kmClient.transact([gameSessionStore], ([gameSessionState]) => {
 			gameSessionState.started = true;
 			gameSessionState.startTimestamp = kmClient.serverTimestamp();
@@ -21,6 +29,7 @@ export const gameSessionActions = {
 		await kmClient.transact([gameSessionStore], ([gameSessionState]) => {
 			gameSessionState.started = false;
 			gameSessionState.startTimestamp = 0;
+			gameSessionState.countdownStartTimestamp = 0;
 		});
 	}
 };

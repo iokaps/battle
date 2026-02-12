@@ -1,26 +1,31 @@
 {
-	"gameLobbyMd": "# Game Lobby\n\nThis is a sample markdown to demonstrate various markdown features.\n\n## Starting soon\n\nGame is starting soon. **Get ready!**\n\n## Rules\n\n1. Wait for the host to start the game.\n2. Follow the instructions on the presenter screen.\n3. Open [Games for Crowds](https://gamesforcrowds.com) for more info.\n\n## What people say\n\n> **This game is awesome!** - Player 1\n\n> **I had a good time playing this.** - Player 2\n\n> **Always looking forward to the next round!** - Player 3\n\n---\n\n## Sample Code\n\n```typescript\n// Code block\nconsole.log('Hello, world!');\n```",
+	"gameLobbyMd": "# Battle Arena\n\nWaiting for the host to start the battle.\n\n## How to play\n\n1. **Move** using the joystick on the left\n2. **Attack** enemies in your facing direction with the sword button\n3. **Shield** to block one hit (5 sec cooldown after absorbing)\n4. **Ranged Attack** fires a projectile in your facing direction (3 sec cooldown)\n5. **Power-ups** spawn on the field — grab health, damage boosts, or shields!\n6. Last player (or team) standing wins!\n\n> *Your AI-generated avatar will appear on the arena!*",
 
-	"connectionsMd": "Scan the QR to join the game.",
+	"connectionsMd": "Scan the QR to join the battle.",
 
-	"sharedStateMd": "# Shared State Host\nThis is an example of shared state view. Host can start the game, open the presenter screen and allow players to join by scanning the QR.\n\n## Host Actions\nHere's a demo of dashboard actions that can be used to control the state on presenter and player screens.",
+	"sharedStateMd": "# Battle Arena Host\nManage the battle from here. Start the game when all players have joined.",
 
-	"sharedStatePlayerMd": "# Shared State Player\nYou are connected as a player. Host has started the game. In this shared state example the playtime is synchronized between all players.",
+	"sharedStatePlayerMd": "# Battle in progress\nFight!",
 
 	"players": "Players Connected",
 	"online": "Online",
 	"offline": "Offline",
-	"startButton": "Start Game",
-	"stopButton": "Stop Game",
+	"startButton": "Start Battle",
+	"startBattleWithCount": "Start Battle ({{count}})",
+	"stopButton": "Stop Battle",
 	"loading": "Loading...",
 
-	"menuHelpMd": "# Help\n\nThis is the help section. Here you can find information about how to play the game and get assistance if needed.\n\n## How to Play\n\n1. Join the game using the provided link or QR code.\n2. Follow the instructions on your screen.\n3. Interact with other players as required by the game.\n\n## Getting Assistance\n\nIf you encounter any issues, please contact the host or refer to the FAQ section on our website.",
+	"menuHelpMd": "# Help\n\n## How to Play\n\n1. Join the game using the provided link or QR code.\n2. Enter your name and describe your character.\n3. AI will generate a unique avatar for you!\n4. Use the joystick to move and buttons to attack/shield.\n5. Aim your attacks — they hit in the direction you're facing.\n6. Use ranged attack to fire projectiles from a distance!\n7. Pick up power-ups for health, damage, or shield boosts.\n8. Last player (or team) standing wins!",
 
-	"createProfileMd": "# Welcome!\n\nPlease enter your name to join the game.",
+	"createProfileMd": "# Join the Battle!\n\nEnter your name and describe your character.",
 
 	"playerNamePlaceholder": "Your name...",
 	"playerNameLabel": "Name:",
-	"playerNameButton": "Continue",
+	"playerNameButton": "Join Battle",
+
+	"avatarPromptPlaceholder": "Describe your character (e.g., a knight with a sword)...",
+	"avatarPromptHint": "AI will generate a unique avatar based on your description!",
+	"avatarError": "!",
 
 	"playerLinkLabel": "Player Link",
 	"presenterLinkLabel": "Presenter Link",
@@ -33,5 +38,49 @@
 	"gameTitleLabel": "Game title",
 	"gameDurationLabel": "Game duration (mins)",
 	"saveButton": "Save",
-	"resetButton": "Reset"
+	"resetButton": "Reset",
+
+	"attackButton": "Attack",
+	"shieldButton": "Shield",
+	"shieldCooldown": "Shield recharging...",
+	"rangedButton": "Ranged",
+
+	"killsLabel": "Kills",
+	"aliveLabel": "alive",
+	"eliminatedVerb": "eliminated",
+	"eliminatedTag": "Eliminated",
+	"eliminatedTitle": "You were eliminated!",
+	"eliminatedMessage": "Watch the battle on the presenter screen.",
+
+	"battleInProgress": "Use joystick and buttons to fight!",
+	"battleStatus": "Battle Status",
+
+	"teamModeFfa": "FFA",
+	"teamModeTeams": "2 Teams",
+	"shrinkingArenaOn": "Shrink ON",
+	"shrinkingArenaOff": "Shrink OFF",
+
+	"teamWins": "Team {{team}} wins!",
+	"teamLabel": "Team",
+	"teamScore": "Score",
+
+	"statMvp": "MVP",
+	"statDamageDealer": "Damage Dealer",
+	"statTank": "Tank",
+	"statSurvivor": "Survivor",
+	"damageLabel": "Damage",
+	"blockedLabel": "Blocked",
+	"playerLabel": "Player",
+
+	"victoryTitle": "Victory!",
+	"defeatTitle": "Defeat",
+	"gameOverTitle": "Game Over",
+	"gameOverMessage": "The battle has ended.",
+	"winnerLabel": "Winner",
+	"winsLabel": "wins!",
+
+	"countdownGo": "GO!",
+	"firstBlood": "FIRST BLOOD",
+	"spectating": "Spectating...",
+	"waitingForHost": "Waiting for host to start..."
 }

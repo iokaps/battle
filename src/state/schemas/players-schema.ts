@@ -4,7 +4,13 @@ import { z } from '@kokimoki/kit';
  * Schema for player entry
  */
 export const playerEntrySchema = z.object({
-	name: z.string()
+	name: z.string(),
+	/** Assigned color hex for arena display */
+	color: z.string(),
+	/** CDN URL of AI-generated avatar (empty if not yet generated) */
+	avatarUrl: z.string(),
+	/** Job ID for avatar generation (empty if not generating) */
+	avatarJobId: z.string()
 });
 
 /**
