@@ -144,7 +144,7 @@ let _localWorld: LocalGameWorldState | null = null;
  */
 export const gameWorldActions = {
 	/** Get the in-memory authoritative world state (controller only) */
-	getLocalWorld(): GameWorldState | null {
+	getLocalWorld(): LocalGameWorldState | null {
 		return _localWorld;
 	},
 

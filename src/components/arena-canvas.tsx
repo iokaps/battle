@@ -834,12 +834,3 @@ export function ArenaCanvas() {
 		</div>
 	);
 }
-
-/** Lighten a hex color by a given amount (0-100) */
-function lightenColor(hex: string, amount: number): string {
-	const num = parseInt(hex.replace('#', ''), 16);
-	const r = Math.min(255, ((num >> 16) & 0xff) + amount);
-	const g = Math.min(255, ((num >> 8) & 0xff) + amount);
-	const b = Math.min(255, (num & 0xff) + amount);
-	return `rgb(${r},${g},${b})`;
-}

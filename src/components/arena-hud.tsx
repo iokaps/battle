@@ -17,10 +17,7 @@ export function ArenaHUD() {
 	const {
 		players,
 		gameOver,
-		winnerId,
-		winnerTeamId,
-		killFeed: killFeedRecord,
-		streaks
+		killFeed: killFeedRecord
 	} = useSnapshot(gameWorldStore.proxy);
 	const killFeed = Object.values(killFeedRecord);
 	const { teamMode } = useSnapshot(gameConfigStore.proxy);
@@ -29,7 +26,6 @@ export function ArenaHUD() {
 	const allPlayers = Object.entries(players);
 	const aliveCount = allPlayers.filter(([, p]) => p.alive).length;
 	const totalCount = allPlayers.length;
-	const winner = winnerId ? players[winnerId] : null;
 
 	// Sorted scoreboard (by kills descending)
 	const scoreboard = React.useMemo(
@@ -62,7 +58,6 @@ export function ArenaHUD() {
 		if (killFeed.length === 0) {
 			firstBloodRef.current = false;
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [killFeed.length, totalCount]);
 
 	return (

@@ -30,7 +30,7 @@ function App({ clientContext }: ModeGuardProps<'host'>) {
 		gameSessionStore.proxy
 	);
 	const worldSnap = useSnapshot(gameWorldStore.proxy);
-	const players = usePlayersWithOnlineStatus();
+	const { players } = usePlayersWithOnlineStatus();
 	const [buttonCooldown, setButtonCooldown] = React.useState(true);
 
 	const isActive = started || countdownStartTimestamp > 0;

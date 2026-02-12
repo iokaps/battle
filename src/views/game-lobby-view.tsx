@@ -10,7 +10,7 @@ import Markdown from 'react-markdown';
  */
 export function GameLobbyView() {
 	const { t } = useTranslation();
-	const players = usePlayersWithOnlineStatus();
+	const { players } = usePlayersWithOnlineStatus();
 
 	return (
 		<div className="space-y-8">

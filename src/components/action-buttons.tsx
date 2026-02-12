@@ -91,12 +91,13 @@ export function ActionButtons({
 	}, []);
 
 	React.useEffect(() => {
+		const cooldownId = cooldownRafRef.current;
+		const rangedId = rangedCooldownRafRef.current;
+		const shieldId = shieldCooldownRafRef.current;
 		return () => {
-			if (cooldownRafRef.current) cancelAnimationFrame(cooldownRafRef.current);
-			if (rangedCooldownRafRef.current)
-				cancelAnimationFrame(rangedCooldownRafRef.current);
-			if (shieldCooldownRafRef.current)
-				cancelAnimationFrame(shieldCooldownRafRef.current);
+			if (cooldownId) cancelAnimationFrame(cooldownId);
+			if (rangedId) cancelAnimationFrame(rangedId);
+			if (shieldId) cancelAnimationFrame(shieldId);
 		};
 	}, []);
 
