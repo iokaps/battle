@@ -100,6 +100,8 @@ export function useGlobalController(): boolean {
 		}
 
 		let gameOverHandled = false;
+		let lastTickTimestamp = kmClient.serverTimestamp();
+		let accumulator = 0;
 
 		// Physics tick — synchronous, no network, guaranteed 20fps
 		const tickId = setInterval(() => {
@@ -113,8 +115,23 @@ export function useGlobalController(): boolean {
 				return;
 			}
 
-			// Process physics on local in-memory state (instant)
-			gameWorldActions.processTickLocal(now);
+			// Calculate elapsed time and accumulate (cap at 1000ms to avoid spiral of death)
+			const elapsed = now - lastTickTimestamp;
+			lastTickTimestamp = now;
+			accumulator += Math.max(0, Math.min(elapsed, 1000));
+
+			// Run as many ticks as needed to catch up to real-time
+			let ticksRun = 0;
+			while (accumulator >= TICK_INTERVAL_MS) {
+				const virtualTickTime = now - accumulator + TICK_INTERVAL_MS;
+				gameWorldActions.processTickLocal(virtualTickTime);
+				accumulator -= TICK_INTERVAL_MS;
+				ticksRun++;
+				if (ticksRun > 20) {
+					accumulator = 0;
+					break;
+				}
+			}
 
 			// Check game over from local state
 			const localWorld = gameWorldActions.getLocalWorld();

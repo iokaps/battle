@@ -56,15 +56,17 @@ export function BattleView() {
 	const lastSentValRef = React.useRef({ dx: 0, dy: 0, shield: false });
 	const rafRef = React.useRef<number | null>(null);
 
-	// Throttle sending inputs at ~10fps. Skip if nothing changed (reduces
-	// network traffic — each send is a server-ACK round-trip transact).
-	const sendInput = React.useCallback(() => {
+	// Throttle sending inputs at ~10fps for movement, but bypass throttle for direct action events
+	// (reduces network traffic while maintaining instant responsiveness).
+	const sendInput = React.useCallback((forceImmediate = false) => {
 		const now = Date.now();
-		if (now - lastSentRef.current < 100) return;
-
 		const { dx, dy, attack, shield, rangedAttack, emote } = inputRef.current;
 
-		// Skip redundant sends when nothing changed and no attack
+		const hasAction = attack || rangedAttack || emote !== '';
+		const isThrottled = !forceImmediate && !hasAction && (now - lastSentRef.current < 100);
+		if (isThrottled) return;
+
+		// Skip redundant sends when nothing changed and no actions
 		const prev = lastSentValRef.current;
 		if (
 			!attack &&
@@ -120,19 +122,26 @@ export function BattleView() {
 
 	const handleAttack = React.useCallback(() => {
 		inputRef.current.attack = true;
-	}, []);
+		sendInput(true);
+	}, [sendInput]);
 
 	const handleRangedAttack = React.useCallback(() => {
 		inputRef.current.rangedAttack = true;
-	}, []);
+		sendInput(true);
+	}, [sendInput]);
 
 	const handleShieldChange = React.useCallback((active: boolean) => {
+		const prevShield = inputRef.current.shield;
 		inputRef.current.shield = active;
-	}, []);
+		if (active !== prevShield) {
+			sendInput(true);
+		}
+	}, [sendInput]);
 
 	const handleEmote = React.useCallback((type: string) => {
 		inputRef.current.emote = type;
-	}, []);
+		sendInput(true);
+	}, [sendInput]);
 
 	const isAlive = myWorld?.alive ?? false;
 	const hp = myWorld?.hp ?? 0;

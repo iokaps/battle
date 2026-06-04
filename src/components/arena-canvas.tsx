@@ -87,7 +87,9 @@ export function ArenaCanvas() {
 	const prevPlayerHp = React.useRef<Record<string, number>>({});
 	const prevPlayerAlive = React.useRef<Record<string, boolean>>({});
 	const prevPlayerShielding = React.useRef<Record<string, boolean>>({});
-	const prevPowerUpIds = React.useRef<Set<string>>(new Set());
+	const prevPowerUpPositions = React.useRef<
+		Map<string, { x: number; y: number; type: string }>
+	>(new Map());
 	const prevProjectileIds = React.useRef<Set<string>>(new Set());
 
 	// Cache avatar images reactively
@@ -281,6 +283,25 @@ export function ArenaCanvas() {
 				}
 			}
 
+			// Clean up stale player refs to prevent memory leaks
+			for (const id of Object.keys(smoothPositions.current)) {
+				if (!worldPlayers[id]) {
+					delete smoothPositions.current[id];
+				}
+			}
+			for (const id of Object.keys(deathTimestamps.current)) {
+				if (!worldPlayers[id]) {
+					delete deathTimestamps.current[id];
+				}
+			}
+			for (const id of Object.keys(prevPlayerHp.current)) {
+				if (!worldPlayers[id]) {
+					delete prevPlayerHp.current[id];
+					delete prevPlayerAlive.current[id];
+					delete prevPlayerShielding.current[id];
+				}
+			}
+
 			// ──── Particle event detection ────
 			for (const [id, player] of Object.entries(worldPlayers)) {
 				const prevHp = prevPlayerHp.current[id];
@@ -311,16 +332,24 @@ export function ArenaCanvas() {
 			}
 
 			// Power-up pickup detection
-			const currentPuIds = new Set(
-				Object.values(world.powerUps).map((p: { id: string }) => p.id)
-			);
-			for (const prevId of prevPowerUpIds.current) {
+			const currentPuIds = new Set<string>();
+			for (const pu of Object.values(world.powerUps)) {
+				currentPuIds.add(pu.id);
+				prevPowerUpPositions.current.set(pu.id, { x: pu.x, y: pu.y, type: pu.type });
+			}
+			for (const [prevId, prevPos] of prevPowerUpPositions.current.entries()) {
 				if (!currentPuIds.has(prevId)) {
-					// A power-up was picked up — emit at nearest live player as fallback
-					// (we don't know exactly who picked it up, so skip position)
+					// Power-up was picked up! Emit particles at its coordinates
+					const color =
+						prevPos.type === 'health'
+							? '#4ade80'
+							: prevPos.type === 'damage'
+								? '#f59e0b'
+								: '#22d3ee';
+					particleSystem.emitPickup(prevPos.x, prevPos.y, color);
+					prevPowerUpPositions.current.delete(prevId);
 				}
 			}
-			prevPowerUpIds.current = currentPuIds;
 
 			// Projectile impact detection
 			const currentProjIds = new Set(

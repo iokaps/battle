@@ -60,11 +60,15 @@ export const localPlayerActions = {
 
 	/** Set avatar URL in global players store once generation completes */
 	async setAvatarUrl(url: string) {
-		await kmClient.transact([playersStore], ([playersState]) => {
-			if (playersState.players[kmClient.id]) {
-				playersState.players[kmClient.id].avatarUrl = url;
-				playersState.players[kmClient.id].avatarJobId = '';
+		await kmClient.transact(
+			[localPlayerStore, playersStore],
+			([localPlayerState, playersState]) => {
+				localPlayerState.avatarJobId = '';
+				if (playersState.players[kmClient.id]) {
+					playersState.players[kmClient.id].avatarUrl = url;
+					playersState.players[kmClient.id].avatarJobId = '';
+				}
 			}
-		});
+		);
 	}
 };
